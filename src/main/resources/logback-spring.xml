@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file>disk/config/log/flowserver.log</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Daily rollover with compression -->
+            <fileNamePattern>./log/MyTools-%d{yyyy-MM-dd}-${PID}.%i.log</fileNamePattern>
+            <!-- keep 30 days worth of history -->
+            <maxHistory>2</maxHistory>
+            <maxFileSize>500MB</maxFileSize>
+            <totalSizeCap>1500MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+<!--            <pattern>%date{yyyy-MM-dd HH:mm:ss} ${PID}: %highlight(%-5level) %logger{0} [%file:%line] - %msg%n</pattern>-->
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} ${PID}: %highlight(%-5level) %logger{0} [%file:%line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Specify logging levels -->
+	<logger name="org.springframework" level="ERROR" />
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
