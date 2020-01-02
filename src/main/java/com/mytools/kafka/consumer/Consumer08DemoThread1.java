@@ -1,4 +1,4 @@
-package com.bj58.sec.test.demo.consumer;
+package com.mytools.kafka.consumer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import kafka.consumer.Consumer;
+import kafka.consumer.ConsumerConfig;
+import kafka.consumer.ConsumerIterator;
+import kafka.consumer.KafkaStream;
+import kafka.javaapi.consumer.ConsumerConnector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +21,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
-
-import kafka.consumer.Consumer;
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.ConsumerIterator;
-import kafka.consumer.KafkaStream;
-import kafka.javaapi.consumer.ConsumerConnector;
 
 public class Consumer08DemoThread1 {
 
@@ -58,7 +57,7 @@ public class Consumer08DemoThread1 {
 		ExecutorService pool = Executors.newFixedThreadPool(NUM_THREADS);// 定义线程数
 		ListeningExecutorService executorService = MoreExecutors.listeningDecorator(pool);
 
-		
+
 		for (int i = 0; i < NUM_THREADS; i++) {
 
 			futures.add(executorService.submit(new Callable<Integer>() {

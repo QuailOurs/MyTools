@@ -1,27 +1,24 @@
-package com.bj58.sec.test.demo.consumer;
+package com.mytools.kafka.consumer;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.Lists;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 
 import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.collect.Lists;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 public class Consumer08DemoThread2 {
 
@@ -75,7 +72,7 @@ public class Consumer08DemoThread2 {
 						public void run() {
 							info(message);
 						}
-						
+
 					});
 				}
 				messageStreams.clear();
@@ -92,7 +89,7 @@ public class Consumer08DemoThread2 {
 				e.printStackTrace();
 			}
 		}
-		
+
 		// Thread thread = new Thread(() -> {
 		//
 		// }, "Topic-Distribute-" + topic + "-");

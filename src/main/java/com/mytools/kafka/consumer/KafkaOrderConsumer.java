@@ -5,14 +5,13 @@
  * @Date: 2018-12-27 11:12:86
  * @Description:
  *************************************************/
-package com.bj58.sec.test.demo.consumer;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.mytools.kafka.consumer;
 
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.message.MessageAndMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @File 恶趣味恶趣味次.java
