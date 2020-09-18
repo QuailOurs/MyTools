@@ -1,4 +1,4 @@
-package com.bj58.sec.test.demo.producer;
+package com.mytools.kafka.producer;
 
 import org.apache.kafka.clients.producer.ProducerInterceptor;
 import org.apache.kafka.clients.producer.ProducerRecord;

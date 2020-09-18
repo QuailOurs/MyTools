@@ -34,6 +34,7 @@ See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-
 
     <!-- Specify logging levels -->
 	<logger name="org.springframework" level="ERROR" />
+	<logger name="org.apache.kafka" level="ERROR" />
 
 	<root level="INFO">
 		<appender-ref ref="CONSOLE" />

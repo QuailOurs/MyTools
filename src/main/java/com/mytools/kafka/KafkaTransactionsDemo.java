@@ -39,8 +39,8 @@ public class KafkaTransactionsDemo {
     }
 
     static {
-        _producerConfigProps.put("bootstrap.servers", com.bj58.sec.test.demo.KafkaProperties.BOOTSTRAP_ERVERS);//required
-        _producerConfigProps.put("client.id", com.bj58.sec.test.demo.KafkaProperties.CLIENT_ID_PRODUCER);
+        _producerConfigProps.put("bootstrap.servers", KafkaProperties.BOOTSTRAP_ERVERS);//required
+        _producerConfigProps.put("client.id", KafkaProperties.CLIENT_ID_PRODUCER);
         _producerConfigProps.put("key.serializer","org.apache.kafka.common.serialization.IntegerSerializer");//required
         _producerConfigProps.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");//required
         _producerConfigProps.put("batch.size","16384");//default 16384 | 16K
@@ -49,11 +49,11 @@ public class KafkaTransactionsDemo {
         _producerConfigProps.put("metadata.max.age.ms", "300000");// default 300000 | 5min
         _producerConfigProps.put("max.block.ms", "60000");// default 60000
         _producerConfigProps.put("request.timeout.ms", "30000");// default 30000
-        _producerConfigProps.put("transactional.id", com.bj58.sec.test.demo.KafkaProperties.TRANSACTION_ID);
+        _producerConfigProps.put("transactional.id", KafkaProperties.TRANSACTION_ID);
 
-        _consumerConfigProps.put("bootstrap.servers", com.bj58.sec.test.demo.KafkaProperties.BOOTSTRAP_ERVERS); //required
-        _consumerConfigProps.put("group.id", com.bj58.sec.test.demo.KafkaProperties.GROUP_ID);
-        _consumerConfigProps.put("client.id", com.bj58.sec.test.demo.KafkaProperties.CLIENT_ID_CONSUMER);
+        _consumerConfigProps.put("bootstrap.servers", KafkaProperties.BOOTSTRAP_ERVERS); //required
+        _consumerConfigProps.put("group.id", KafkaProperties.GROUP_ID);
+        _consumerConfigProps.put("client.id", KafkaProperties.CLIENT_ID_CONSUMER);
         _consumerConfigProps.put("key.deserializer", "org.apache.kafka.common.serialization.IntegerDeserializer");
         _consumerConfigProps.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         _consumerConfigProps.put("max.poll.interval.ms", "300000");//default 300000
@@ -66,7 +66,7 @@ public class KafkaTransactionsDemo {
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(_consumerConfigProps);
         // for test
-        consumer.assign(Arrays.asList(new TopicPartition(com.bj58.sec.test.demo.KafkaProperties.TOPIC_NAME,0)));
+        consumer.assign(Arrays.asList(new TopicPartition(KafkaProperties.TOPIC_NAME,0)));
         // Note that the ‘transactional.id’ configuration _must_ be specified in the
         // producer config in order to use transactions.
         KafkaProducer<String, String> producer = new KafkaProducer<>(_producerConfigProps);
@@ -86,7 +86,7 @@ public class KafkaTransactionsDemo {
         producer.initTransactions();
         int times = 3;
         while(true) {
-            ConsumerRecords<String, String> records = consumer.poll(com.bj58.sec.test.demo.KafkaProperties.CONSUMER_POLL_TIMEOUT);
+            ConsumerRecords<String, String> records = consumer.poll(KafkaProperties.CONSUMER_POLL_TIMEOUT);
             if (!records.isEmpty()) {
 
                 // Start a new transaction. This will begin the process of batching the consumed
@@ -108,7 +108,7 @@ public class KafkaTransactionsDemo {
                 //
                 // If this returns an error, we should abort the transaction.
                 try {
-                    producer.sendOffsetsToTransaction(_offsets, com.bj58.sec.test.demo.KafkaProperties.GROUP_ID);
+                    producer.sendOffsetsToTransaction(_offsets, KafkaProperties.GROUP_ID);
                     if(-- times == 0)
                         throw new IllegalStateException();
                     // Now that we have consumed, processed, and produced a batch of messages, let's
@@ -118,7 +118,7 @@ public class KafkaTransactionsDemo {
                 }catch (Exception e){
                     producer.abortTransaction();
                     LOG.warn("exception occurred,希望重启后从"
-                            + (_offsets.get(new TopicPartition(com.bj58.sec.test.demo.KafkaProperties.TOPIC_NAME,0) ).offset() - records.count() )
+                            + (_offsets.get(new TopicPartition(KafkaProperties.TOPIC_NAME,0) ).offset() - records.count() )
                             + "开始消费");
                     consumer.close();
                     producer.close();
@@ -132,7 +132,7 @@ public class KafkaTransactionsDemo {
         List<ProducerRecord<String, String>> res = new ArrayList<>();
         for (ConsumerRecord<String,String> record : records) {
             info(record);
-            res.add(new ProducerRecord<String, String>(com.bj58.sec.test.demo.KafkaProperties.RES_TOPIC_NAME,record.offset() + ""));
+            res.add(new ProducerRecord<String, String>(KafkaProperties.RES_TOPIC_NAME,record.offset() + ""));
             updateOffset(new TopicPartition(record.topic(),record.partition()),new OffsetAndMetadata(record.offset()));
         }
         return res;

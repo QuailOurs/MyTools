@@ -1,4 +1,4 @@
-package com.bj58.sec.test.demo;
+package com.mytools.kafka;
 
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;

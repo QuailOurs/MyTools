@@ -1,7 +1,8 @@
-package com.bj58.sec.test.demo.producer;
+package com.mytools.kafka.producer;
 
 import java.util.Properties;
 
+import com.mytools.kafka.KafkaProperties;
 import org.apache.kafka.clients.producer.Callback;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -11,12 +12,11 @@ import org.apache.kafka.common.errors.ProducerFencedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bj58.sec.test.demo.KafkaProperties;
 /**
 * 注意：
 * 1.KafkaProducer是线程安全，也可以一个线程独享一个KafkaProducer
 * 2.千万不要频繁创建KafkaProducer，尤其不要每处理一条消息创建一个KafkaProducer
-* 3.KafkaProducer使用完后需要调用close方法关闭  
+* 3.KafkaProducer使用完后需要调用close方法关闭
 */
 public class ProducerDemo {
 
@@ -32,7 +32,7 @@ public class ProducerDemo {
     public static void main(String[] args) throws Exception {
         final boolean isAsync = args.length == 0 || args[0].trim().equalsIgnoreCase("async");
         final ProducerDemo producerDemo = new ProducerDemo();
-        producerDemo.produce(isAsync,KafkaProperties.RES_TOPIC_NAME);
+        producerDemo.produce(isAsync, KafkaProperties.RES_TOPIC_NAME);
     }
 
     ProducerDemo() {

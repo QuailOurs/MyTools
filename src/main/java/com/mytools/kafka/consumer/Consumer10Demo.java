@@ -1,26 +1,20 @@
-package com.bj58.sec.test.demo.consumer;
+package com.mytools.kafka.consumer;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.OffsetAndTimestamp;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.mytools.kafka.KafkaProperties;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bj58.sec.test.demo.KafkaProperties;
+import java.util.*;
 /**
  * 注意：
  * 1.KafkaConsumer不是线程安全，一个线程只能独享一个KafkaConsumer
  * 2.千万不要频繁创建KafkaConsumer
- * 3.KafkaConsumer使用完后需要调用close方法关闭  
+ * 3.KafkaConsumer使用完后需要调用close方法关闭
  */
 public class Consumer10Demo {
 
@@ -91,7 +85,7 @@ public class Consumer10Demo {
             _consumer.close();
         }
     }
-    
+
 	public void consumeThread() {
 
 		KafkaConsumer  consumer = new KafkaConsumer(_props);
@@ -130,8 +124,8 @@ public class Consumer10Demo {
         thread.start();
 
 	}
-    
-    
+
+
     public void consume(){
 
         try{
@@ -229,8 +223,11 @@ public class Consumer10Demo {
     }
 
     public void info(ConsumerRecord<String,String> record) {
-        LOG.info("conusmer:{},topic:{},partition:{},offset:{},key:{},value:{}",
-                this._name,record.topic(),record.partition(),record.offset(),record.key(),record.value());
+//        LOG.info("conusmer:{},topic:{},partition:{},offset:{},key:{},value:{}",
+//                this._name,record.topic(),record.partition(),record.offset(),record.key(),record.value());
+
+//        System.out.println(record.value());
+
     }
 
 }
