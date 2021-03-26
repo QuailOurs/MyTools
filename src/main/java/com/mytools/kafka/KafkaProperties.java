@@ -2,10 +2,10 @@ package com.mytools.kafka;
 
 public interface KafkaProperties {
 
-//    String BOOTSTRAP_ERVERS = "10.135.9.4:9092,10.135.9.5:9092,10.135.9.6:9092,10.135.9.7:9092,10.135.9.8:9092";
 //    String TOPIC_NAME = "hdp_teu_ops_nginx_log";
 
     String BOOTSTRAP_ERVERS = "10.135.9.4:9092,10.135.9.5:9092,10.135.9.6:9092,10.135.9.7:9092,10.135.9.8:9092";
+//    String BOOTSTRAP_ERVERS = "10.178.10.8:9092,10.178.10.10:9092,10.178.10.11:9092,10.178.10.12:9092,10.178.10.13:9092";
 //    String TOPIC_NAME = "hdp_teu_ops_nginx_log";
 
 //    String TOPIC_NAME = "hdp_teu_spat_im_access_logdispatch";
@@ -16,7 +16,9 @@ public interface KafkaProperties {
 
 //    String TOPIC_NAME = "hdp_teu_op_thirdservice_log";
 //    String TOPIC_NAME = "hdp_lbg_ectech_wmda_realtime_logs";
-    String TOPIC_NAME = "hdp_teu_op_firewall_feature_farme_out";
+//    String TOPIC_NAME = "hdp_teu_op_firewall_feature_farme_out";
+//    String TOPIC_NAME = "hdp_ubu_xxzl_hunter_strategy_adv";
+    String TOPIC_NAME = "hdp_teu_op_risk_decision_response";
 //    String BOOTSTRAP_ERVERS = "10.135.9.4:9092,10.135.9.5:9092,10.135.9.6:9092,10.135.9.7:9092,10.135.9.8:9092";
 
     String RES_TOPIC_NAME = "hdp_teu_dpd_test_apache_logs_ctp_target";
@@ -28,7 +30,9 @@ public interface KafkaProperties {
 //    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_teu_op_skymirror-bRe09";
 //    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_teu_op_thirdservice_log-GlZYR";
 //    String CLIENT_ID_CONSUMER = "hdp_lbg_ectech-hdp_lbg_ectech_wmda_realtime_logs-Xh3Rl";
-    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_teu_op_firewall_feature_farme_out-33tya";
+//    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_teu_op_firewall_feature_farme_out-33tya";
+    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_teu_op_risk_decision_response-4dsUj";
+//    String CLIENT_ID_CONSUMER = "hdp_teu_op-hdp_ubu_xxzl_hunter_strategy_adv-ybNlf";
     // clientId使用创建Topic时工单生成的clientId，也可以在NightFury申请
     String CLIENT_ID_PRODUCER = "hdp_teu_dpd-test_apache_logs_ctp_target";
     // hadoop账号-transactionId
